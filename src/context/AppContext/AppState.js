@@ -13,16 +13,20 @@ export default function AppState({ children }) {
     // toast.success("Product Added Successfully")
     const exisitingProduct = cartItems.find((p) => p.id === product.id);
     if (exisitingProduct) {
-      const updatedCart = cartItems.map((p) =>
-        p.id === product.id ? { ...p, quantity: Number(p.quantity) + 1 } : p
-      );
-
-      setCartItems(updatedCart);
-    } else {
+      if (exisitingProduct.quantity < 10) {
+          const updatedCart = cartItems.map((p) =>
+              p.id === product.id ? { ...p, quantity: Number(p.quantity) + 1 } : p
+          );
+          setCartItems(updatedCart);
+          toast.success("Product Added in Cart Successfully");
+      } else {
+          toast.error("You can only add up to 10 quantities of this product.");
+      }
+  } else {
       setCartItems([...cartItems, { ...product, quantity: 1 }]);
-    }
-    toast.success("Product Added in Cart Successfully")
-  };
+      toast.success("Product Added in Cart Successfully");
+  }
+};
 
   let handleQuantityChange = (productId,newQuantity)=>{
     if (newQuantity >= 1 && newQuantity <= 10) {

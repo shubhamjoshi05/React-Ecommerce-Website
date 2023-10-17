@@ -25,7 +25,7 @@ function App() {
         setOpenWishlist={setOpenWishlist}
       />
 
-      <div className="pt-20">
+      <div className="pt-20 mx-auto max-w-7xl">
         <Routes>
           <Route index exact element={<HomePage />} />
           <Route path="category/:id" element={<CategoryPage />} />
